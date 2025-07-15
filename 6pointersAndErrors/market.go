@@ -27,11 +27,17 @@ func (w *Wallet) Deposit(amount Bitcoin) {
 func (w *Wallet) Balance() Bitcoin{
 	return w.balance
 }
+// In Go, errors are values, so we can refactor it out into a variable and have a 
+// single source of truth for it.
+// The var keyword allows us to define values global to the package.
+
+var ErrInsufficientFunds = errors.New("cannot withdraw, insufficient funds")
+
 
 func (w *Wallet) Withdraw(amount Bitcoin) error {
 
 	if amount > w.balance {
-		return errors.New("oh no")
+		return ErrInsufficientFunds
 	}
 
 	w.balance -= amount
