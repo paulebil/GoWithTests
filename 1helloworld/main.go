@@ -1,9 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"os"
-	"github.com/paulebil/GoWithTests/mocking"
+	"github.com/paulebil/GoWithTests/9mocking"
 )
 
 const (
@@ -46,5 +45,6 @@ func greetingPrefix(language string) (prefix string){
 
 
 func main(){
-	mocking.Countdown(os.Stdout)
+	sleeper := &mocking.ConfigurableSleeper{1 * time.Second, time.Sleep}
+	mocking.Countdown(os.Stdout, sleeper)
 }
